@@ -1,39 +1,233 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>제품 문의 폼</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eglink Want List Form</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      font-family: Arial, sans-serif;
+      color: #111;
+    }
+
+    .page {
+      width: 1000px;
+      margin: 0 auto;
+      padding: 10px 20px 40px;
+    }
+
+    .logo {
+      margin-bottom: 10px;
+    }
+
+    .logo img {
+      width: 520px;
+      max-width: 100%;
+      display: block;
+    }
+
+    .info-section {
+      margin-top: 10px;
+      margin-left: 12px;
+      line-height: 1.45;
+      font-size: 16px;
+    }
+
+    .info-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .highlight-red {
+      color: red;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .normal-text {
+      margin-top: 28px;
+      font-size: 16px;
+    }
+
+    .big-red {
+      margin-top: 28px;
+      color: red;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .want-list-box {
+      margin-top: 35px;
+      background: #d6d6d6;
+      border-radius: 16px;
+      padding: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      font-size: 16px;
+      padding-bottom: 20px;
+      font-weight: bold;
+    }
+
+    td {
+      vertical-align: top;
+      padding: 10px 8px;
+    }
+
+    .qty-input {
+      width: 50px;
+      height: 22px;
+    }
+
+    .model-name {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+
+    .warranty-select {
+      width: 120px;
+      height: 30px;
+    }
+
+    .price-input {
+      width: 80px;
+      height: 24px;
+    }
+
+    .comment-box {
+      width: 100%;
+      min-width: 280px;
+      height: 70px;
+      resize: vertical;
+    }
+
+    .price-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .call-wrap {
+      font-size: 14px;
+    }
+
+    .submit-wrap {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .submit-btn {
+      padding: 6px 18px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-<h2>제품 문의 폼</h2>
+<div class="page">
 
-<form
-    action="https://script.google.com/macros/s/AKfycbxHIZU5Ap4eFwBoYcQNmCYSC6ziw4ldxhaoR2gUnoTCgM-GxNuAm6dKQulQVYVOOCI/exec"
-    method="POST"
->
+  <!-- 좌측 상단 로고 -->
+  <div class="logo">
+    <img src="logo.png" alt="Eglink System Logo" />
+  </div>
 
-    <label>이메일</label><br>
-    <input type="email" id="email" name="email" required><br><br>
+  <!-- 구글 시트에서 불러올 영역 -->
+  <div class="info-section">
+    <div class="info-title">Eglink System</div>
 
-    <label>제품명</label><br>
-    <input type="text" name="product" required><br><br>
+    <div id="userName">Soon-Cheol Kwon (Tommy K)</div>
+    <div id="userPhone">Phone: 82-2-6679-5050</div>
+    <div id="userEmail">Email: eglink@eglink.co.kr</div>
+    
+    
 
-    <label>요청사항</label><br>
-    <textarea name="note"></textarea><br><br>
+    
 
-    <button type="submit">제출</button>
+    
 
-</form>
+    
+  </div>
+
+  <!-- 하단 테이블 -->
+  <div class="want-list-box">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px;">Qty</th>
+          <th style="width:320px;">Model</th>
+          <th style="width:160px;">Warrenty</th>
+          <th style="width:170px;">Price</th>
+          <th>Comments</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><input type="text" class="qty-input" /></td>
+          <td><div class="model-name">Associated Research 3670</div></td>
+          <td>
+            <select class="warranty-select">
+              <option>(Select Here)</option>
+              <option>30 Days</option>
+              <option>90 Days</option>
+              <option>6 Months</option>
+              <option>1 Year</option>
+            </select>
+          </td>
+          <td>
+            <div class="price-wrap">$ <input type="text" class="price-input" /></div>
+            <div class="call-wrap">Call: <input type="checkbox" /></div>
+          </td>
+          <td><textarea class="comment-box"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="submit-wrap">
+      <button class="submit-btn">Submit</button>
+    </div>
+  </div>
+</div>
 
 <script>
+/*
+메일 링크 예시
+https://yourdomain.com/index.html?email=eglink@eglink.co.kr
+
+Google Sheet에서 email 기준으로 사용자 정보 조회
+GAS Web App에서 JSON 응답 받는 방식
+*/
+
+const GAS_URL = "https://script.google.com/macros/s/AKfycbz9khqB_FBYzr9Sng6lPI0s7n7aSvpcujlSMQBtqWj5oyXXqOlhvzshih85imyvaELm/exec";
+
 const params = new URLSearchParams(window.location.search);
 const email = params.get("email");
 
 if (email) {
-    document.getElementById("email").value = email;
-    document.getElementById("email").readOnly = true;
+  fetch(`${GAS_URL}?email=${encodeURIComponent(email)}`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("userName").innerText = data.name || "";
+      document.getElementById("userPhone").innerText = "Phone: " + (data.phone || "");
+      document.getElementById("userEmail").innerText = "Email: " + (data.email || "");
+    })
+    .catch(err => {
+      console.log("사용자 정보 불러오기 실패", err);
+    });
 }
 </script>
 
