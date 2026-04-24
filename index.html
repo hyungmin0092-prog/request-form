@@ -3,33 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Form</title>
+    <title>제품 문의 폼</title>
 </head>
 <body>
 
 <h2>제품 문의 폼</h2>
 
-<form id="requestForm">
+<form
+    action="https://script.google.com/macros/s/AKfycbxHIZU5Ap4eFwBoYcQNmCYSC6ziw4ldxhaoR2gUnoTCgM-GxNuAm6dKQulQVYVOOCI/exec"
+    method="POST"
+>
 
     <label>이메일</label><br>
-    <input type="email" id="email" required><br><br>
+    <input type="email" id="email" name="email" required><br><br>
 
     <label>제품명</label><br>
-    <input type="text" id="product" required><br><br>
+    <input type="text" name="product" required><br><br>
 
     <label>요청사항</label><br>
-    <textarea id="note"></textarea><br><br>
+    <textarea name="note"></textarea><br><br>
 
     <button type="submit">제출</button>
 
 </form>
 
-<p id="result"></p>
-
 <script>
-
-const GAS_URL = "https://script.google.com/macros/s/AKfycbzFi5G2NTavaQZj4cWT3S6lmUWDuMKisTP1IpZnQYAzfAjgy9LD1GvLhCEVpckJk8s/exec";
-
 const params = new URLSearchParams(window.location.search);
 const email = params.get("email");
 
@@ -37,33 +35,7 @@ if (email) {
     document.getElementById("email").value = email;
     document.getElementById("email").readOnly = true;
 }
-
-document.getElementById("requestForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
-
-    const data = {
-        email: document.getElementById("email").value,
-        product: document.getElementById("product").value,
-        note: document.getElementById("note").value
-    };
-
-    try {
-        const response = await fetch(GAS_URL, {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        const result = await response.text();
-        document.getElementById("result").innerText = result;
-
-    } catch (error) {
-        document.getElementById("result").innerText = "제출 실패";
-    }
-});
-
 </script>
 
 </body>
+</html>
