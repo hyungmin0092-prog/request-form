@@ -221,13 +221,17 @@ if (email) {
   fetch(`${GAS_URL}?email=${encodeURIComponent(email)}`)
     .then(res => res.json())
     .then(data => {
-      document.getElementById("userName").innerText = data.name || "";
-      document.getElementById("userPhone").innerText = "Phone: " + (data.phone || "");
-      document.getElementById("userEmail").innerText = "Email: " + (data.email || "");
+      console.log(data);
+
       document.querySelector(".info-title").innerText = data.title || "";
+      document.getElementById("userName").innerText = data.name || "";
+      document.getElementById("userPhone").innerText =
+        "Phone: " + (data.phone || "");
+      document.getElementById("userEmail").innerText =
+        "Email: " + (data.email || "");
     })
     .catch(err => {
-      console.log("사용자 정보 불러오기 실패", err);
+      console.log("불러오기 실패", err);
     });
 }
 </script>
