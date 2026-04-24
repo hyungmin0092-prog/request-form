@@ -212,7 +212,7 @@ Google Sheet에서 email 기준으로 사용자 정보 조회
 GAS Web App에서 JSON 응답 받는 방식
 */
 
-const GAS_URL = "https://script.google.com/macros/s/AKfycbz9khqB_FBYzr9Sng6lPI0s7n7aSvpcujlSMQBtqWj5oyXXqOlhvzshih85imyvaELm/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbz-jpQRwbvejhiY5cbSAxOVFqtvV4KquhhogI2wf6tgGvH1j1KuTzGwdpwrb0hNAG_4/exec";
 
 const params = new URLSearchParams(window.location.search);
 const email = params.get("email");
@@ -224,6 +224,7 @@ if (email) {
       document.getElementById("userName").innerText = data.name || "";
       document.getElementById("userPhone").innerText = "Phone: " + (data.phone || "");
       document.getElementById("userEmail").innerText = "Email: " + (data.email || "");
+      document.querySelector(".info-title").innerText = data.title || "";
     })
     .catch(err => {
       console.log("사용자 정보 불러오기 실패", err);
