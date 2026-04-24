@@ -147,11 +147,11 @@
 
   <!-- 구글 시트에서 불러올 영역 -->
   <div class="info-section">
-    <div class="info-title">Eglink System</div>
+    <div class="info-title"></div>
 
-    <div id="userName">Soon-Cheol Kwon (Tommy K)</div>
-    <div id="userPhone">Phone: 82-2-6679-5050</div>
-    <div id="userEmail">Email: eglink@eglink.co.kr</div>
+    <div id="userName"></div>
+    <div id="userPhone"></div>
+    <div id="userEmail"></div>
     
     
 
@@ -162,45 +162,112 @@
     
   </div>
 
-  <!-- 하단 테이블 -->
-  <div class="want-list-box">
-    <table>
-      <thead>
-        <tr>
-          <th style="width:320px;">Model</th>
-          <th style="width:80px;">Qty</th>
-          <th style="width:160px;">Warrenty</th>
-          <th style="width:170px;">Price</th>
-          <th>Comments</th>
-        </tr>
-      </thead>
+<!-- 하단 테이블 -->
+<div class="want-list-box">
 
-      <tbody>
-        <tr>
-          <td><div class="model-name">Associated Research 3670</div></td>
-          <td><input type="text" class="qty-input" /></td>
-          <td>
-            <select class="warranty-select">
-              <option>(Select Here)</option>
-              <option>30 Days</option>
-              <option>90 Days</option>
-              <option>6 Months</option>
-              <option>1 Year</option>
-            </select>
-          </td>
-          <td>
-            <div class="price-wrap">$ <input type="text" class="price-input" /></div>
-            <div class="call-wrap">Call: <input type="checkbox" /></div>
-          </td>
-          <td><textarea class="comment-box"></textarea></td>
-        </tr>
-      </tbody>
-    </table>
+<form
+  action="https://script.google.com/macros/s/AKfycbzu2I_2v76i99QwdYRq1qT_k7xOk53sr1FVhfLcj6dGuL7i6vJZsDdU28zh_9cdDho/exec"
+  method="POST"
+>
 
-    <div class="submit-wrap">
-      <button class="submit-btn">Submit</button>
-    </div>
-  </div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:320px;">Model</th>
+      <th style="width:80px;">Qty</th>
+      <th style="width:160px;">Warrenty</th>
+      <th style="width:170px;">Price</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+
+      <!-- model -->
+      <td>
+        <div class="model-name">Associated Research 3670</div>
+        <input
+          type="hidden"
+          name="model"
+          value="Associated Research 3670"
+        />
+      </td>
+
+      <!-- qty -->
+      <td>
+        <input
+          type="text"
+          name="qty"
+          class="qty-input"
+        />
+      </td>
+
+      <!-- warranty -->
+      <td>
+        <select
+          name="warranty"
+          class="warranty-select"
+        >
+          <option>(Select Here)</option>
+          <option>30 Days</option>
+          <option>90 Days</option>
+          <option>6 Months</option>
+          <option>1 Year</option>
+        </select>
+      </td>
+
+      <!-- price -->
+      <td>
+        <div class="price-wrap">
+          $
+          <input
+            type="text"
+            name="price"
+            class="price-input"
+          />
+        </div>
+
+        <div class="call-wrap">
+          Call:
+          <input
+            type="checkbox"
+            name="call"
+            value="Yes"
+          />
+        </div>
+      </td>
+
+      <!-- comments -->
+      <td>
+        <textarea
+          name="comments"
+          class="comment-box"
+        ></textarea>
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+
+<!-- email 자동 전달 -->
+<input
+  type="hidden"
+  id="hiddenEmail"
+  name="email"
+/>
+
+<div class="submit-wrap">
+  <button
+    type="submit"
+    class="submit-btn"
+  >
+    Submit
+  </button>
+</div>
+
+</form>
+
 </div>
 
 <script>
@@ -229,6 +296,7 @@ if (email) {
         "Phone: " + (data.phone || "");
       document.getElementById("userEmail").innerText =
         "Email: " + (data.email || "");
+      document.getElementById("hiddenEmail").value = email;
     })
     .catch(err => {
       console.log("불러오기 실패", err);
@@ -238,3 +306,4 @@ if (email) {
 
 </body>
 </html>
+
