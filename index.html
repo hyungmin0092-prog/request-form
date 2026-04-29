@@ -272,7 +272,50 @@ if (email) {
       console.log("불러오기 실패", err);
     });
 }
+document.querySelector("form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const rows = document.querySelectorAll("#modelTableBody tr");
+  const email = document.getElementById("hiddenEmail").value;
+
+  let sendData = [];
+
+  rows.forEach(row => {
+    const model = row.querySelector('input[name="model"]').value;
+    const qty = row.querySelector('input[name="qty"]').value;
+    const warranty = row.querySelector('select[name="warranty"]').value;
+    const price = row.querySelector('input[name="price"]').value;
+    const comments = row.querySelector('textarea[name="comments"]').value;
+
+    sendData.push({
+      email: email,
+      model: model,
+      qty: qty,
+      warranty: warranty,
+      price: price,
+      comments: comments
+    });
+  });
+
+  fetch("여기에_doPost_URL", {
+    method: "POST",
+    body: JSON.stringify(sendData),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => res.text())
+  .then(result => {
+    alert("저장 완료");
+    console.log(result);
+  })
+  .catch(err => {
+    console.log(err);
+    alert("저장 실패");
+  });
+});
 </script>
 
 </body>
 </html>
+
