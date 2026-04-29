@@ -297,22 +297,22 @@ document.querySelector("form").addEventListener("submit", function(e) {
     });
   });
 
-  fetch("https://script.google.com/macros/s/AKfycbxyv2T54sdEcX2mDupTRibNqQfOLYQD-mNXUGV29J-xMyEVJTJeZsCZ6B8I3y04mcY/exec", {
+  fetch("YOUR_EXEC_URL", {
     method: "POST",
     body: JSON.stringify(sendData),
     headers: {
-      "Content-Type": "application/json"
-    }
-  })
+    "Content-Type": "text/plain;charset=utf-8"
+  }
+})
   .then(res => res.text())
   .then(result => {
-   console.log(result);
+    console.log(result);
   alert(result);
 })
   .catch(err => {
     console.log(err);
-    alert("저장 실패");
-  });
+  alert("저장 실패: " + err);
+});
 });
 </script>
 
