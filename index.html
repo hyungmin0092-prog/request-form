@@ -181,203 +181,7 @@
     </tr>
   </thead>
 
-  <tbody>
-    <tr>
-
-      <!-- model -->
-      <td>
-        <div class="model-name">Agilent 34401A</div>
-        <input
-          type="hidden"
-          name="model"
-          value="Associated Research 3670"
-        />
-      </td>
-
-      <!-- qty -->
-      <td>
-        <input
-          type="text"
-          name="qty"
-          class="qty-input"
-        />
-      </td>
-
-      <!-- warranty -->
-      <td>
-        <select
-          name="warranty"
-          class="warranty-select"
-        >
-          <option>(Select Here)</option>
-          <option>30 Days</option>
-          <option>90 Days</option>
-          <option>6 Months</option>
-          <option>1 Year</option>
-        </select>
-      </td>
-
-      <!-- price -->
-      <td>
-        <div class="price-wrap">
-          $
-          <input
-            type="text"
-            name="price"
-            class="price-input"
-          />
-        </div>
-
-        <div class="call-wrap">
-          Call:
-          <input
-            type="checkbox"
-            name="call"
-            value="Yes"
-          />
-        </div>
-      </td>
-
-      <!-- comments -->
-      <td>
-        <textarea
-          name="comments"
-          class="comment-box"
-        ></textarea>
-      </td>
-
-    </tr>
-    <tr>
-
-      <!-- model -->
-      <td>
-        <div class="model-name">Keithley 2400</div>
-        <input
-          type="hidden"
-          name="model"
-          value="Associated Research 3670"
-        />
-      </td>
-
-      <!-- qty -->
-      <td>
-        <input
-          type="text"
-          name="qty"
-          class="qty-input"
-        />
-      </td>
-
-      <!-- warranty -->
-      <td>
-        <select
-          name="warranty"
-          class="warranty-select"
-        >
-          <option>(Select Here)</option>
-          <option>30 Days</option>
-          <option>90 Days</option>
-          <option>6 Months</option>
-          <option>1 Year</option>
-        </select>
-      </td>
-
-      <!-- price -->
-      <td>
-        <div class="price-wrap">
-          $
-          <input
-            type="text"
-            name="price"
-            class="price-input"
-          />
-        </div>
-
-        <div class="call-wrap">
-          Call:
-          <input
-            type="checkbox"
-            name="call"
-            value="Yes"
-          />
-        </div>
-      </td>
-
-      <!-- comments -->
-      <td>
-        <textarea
-          name="comments"
-          class="comment-box"
-        ></textarea>
-      </td>
-      
-
-    </tr>
-    <tr>
-
-      <!-- model -->
-      <td>
-        <div class="model-name">R&S ETL</div>
-        <input
-          type="hidden"
-          name="model"
-          value="Associated Research 3670"
-        />
-      </td>
-
-      <!-- qty -->
-      <td>
-        <input
-          type="text"
-          name="qty"
-          class="qty-input"
-        />
-      </td>
-
-      <!-- warranty -->
-      <td>
-        <select
-          name="warranty"
-          class="warranty-select"
-        >
-          <option>(Select Here)</option>
-          <option>30 Days</option>
-          <option>90 Days</option>
-          <option>6 Months</option>
-          <option>1 Year</option>
-        </select>
-      </td>
-
-      <!-- price -->
-      <td>
-        <div class="price-wrap">
-          $
-          <input
-            type="text"
-            name="price"
-            class="price-input"
-          />
-        </div>
-
-        <div class="call-wrap">
-          Call:
-          <input
-            type="checkbox"
-            name="call"
-            value="Yes"
-          />
-        </div>
-      </td>
-
-      <!-- comments -->
-      <td>
-        <textarea
-          name="comments"
-          class="comment-box"
-        ></textarea>
-      </td>
-
-    </tr>
+  <tbody id="modelTableBody">
   </tbody>
 </table>
 
@@ -410,7 +214,7 @@ Google Sheet에서 email 기준으로 사용자 정보 조회
 GAS Web App에서 JSON 응답 받는 방식
 */
 
-const GAS_URL = "https://script.google.com/macros/s/AKfycbxdt9X5gzQM-lXXv0CMSpNLAaYTBDIikeY6Sr6ZHNfzDB9mO-QnpTy1bcYW9LOp3DnI/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbwfM54hwyDg-FZZYyTLnPYlDhPkCaD6ZsO58sfjkZ8UDcsxFiXSMBpWuDjUpz2yQoYL/exec";
 
 const params = new URLSearchParams(window.location.search);
 const email = params.get("email");
@@ -428,6 +232,41 @@ if (email) {
       document.getElementById("userEmail").innerText =
         "Email: " + (data.email || "");
       document.getElementById("hiddenEmail").value = email;
+
+      const tbody = document.getElementById("modelTableBody");
+
+      data.models.forEach(model => {
+      tbody.innerHTML += `
+      <tr>
+        <td>
+          <div class="model-name">${model}</div>
+          <input type="hidden" name="model" value="${model}" />
+        </td>
+
+        <td>
+          <input type="text" name="qty" class="qty-input" />
+        </td>
+
+        <td>
+          <select name="warranty" class="warranty-select">
+            <option>(Select Here)</option>
+            <option>30 Days</option>
+            <option>90 Days</option>
+            <option>6 Months</option>
+            <option>1 Year</option>
+          </select>
+        </td>
+
+        <td>
+          <input type="text" name="price" class="price-input" />
+        </td>
+
+        <td>
+          <textarea name="comments" class="comment-box"></textarea>
+        </td>
+      </tr>
+      `;
+      });
     })
     .catch(err => {
       console.log("불러오기 실패", err);
